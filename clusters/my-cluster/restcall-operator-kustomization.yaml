@@ -15,3 +15,53 @@ spec:
   targetNamespace: default
   timeout: 3m0s
   wait: true
+patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+            annotations:
+                deployment.kubernetes.io/revision: "1"
+            creationTimestamp: "2025-01-31T15:27:54Z"
+            generation: 1
+            name: restcall-sample
+            namespace: default
+            ownerReferences:
+            - apiVersion: call.restcall/v1alpha1
+              blockOwnerDeletion: true
+              controller: true
+              kind: Restcall
+              name: restcall-sample
+              uid: 6c5d052f-d377-4d42-ac57-94471e81875c
+            resourceVersion: "1023196"
+            uid: 9f9db423-5fc4-43bc-8b2e-ef8c24e4e304
+        spec:
+            progressDeadlineSeconds: 600
+            replicas: 1
+            revisionHistoryLimit: 10
+            selector:
+                matchLabels:
+                    app.kubernetes.io/managed-by: RestcallController
+                    app.kubernetes.io/name: restcall-operator
+                    app.kubernetes.io/version: 0.0.5
+            strategy:
+                rollingUpdate:
+                    maxSurge: 25%
+                    maxUnavailable: 25%
+                type: RollingUpdate
+            template:
+                metadata:
+                    creationTimestamp: null
+                    labels:
+                        app.kubernetes.io/managed-by: RestcallController
+                        app.kubernetes.io/name: restcall-operator
+                        app.kubernetes.io/version: 0.0.5
+                spec:
+                    containers:
+                    - env:
+                        - name: REST_URL
+                          value: o2ims-infrastructureInventory/v1
+                      
+    target:
+        name: restcall-sample
+        kind: Restcall
