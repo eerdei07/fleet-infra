@@ -64,4 +64,4 @@ spec:
                       
       target:
         name: restcall-sample
-        kind: Restcall
+        kind: Deployment
