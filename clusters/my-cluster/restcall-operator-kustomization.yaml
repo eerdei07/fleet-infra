@@ -25,7 +25,6 @@ spec:
             template:
                 spec:
                     containers:
-                    name: rest
                     - env:
                         - name: REST_URL
                           value: o2ims-infrastructureInventory/v1
