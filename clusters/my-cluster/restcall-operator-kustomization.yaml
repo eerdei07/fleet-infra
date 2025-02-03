@@ -20,14 +20,20 @@ spec:
         apiVersion: apps/v1
         kind: Deployment
         metadata:
-            name: restcall-sample
+          name: restcall-sample
         spec:
-            template:
-                spec:
-                    containers:
-                    - env:
-                        - name: REST_URL
-                          value: o2ims-infrastructureInventory/v1
+          selector:
+            matchLabels:
+              app.kubernetes.io/managed-by: RestcallController
+              app.kubernetes.io/name: restcall-operator
+              app.kubernetes.io/version: 0.0.5
+         template:
+           spec:
+             containers:
+               - env:
+                 - name: REST_URL
+                   value: o2ims-infrastructureInventory/v1
+               name: rest
                       
       target:
         name: restcall-sample
