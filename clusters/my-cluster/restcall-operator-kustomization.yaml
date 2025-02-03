@@ -33,7 +33,7 @@ spec:
                 - env:
                   - name: REST_URL
                     value: o2ims-infrastructureInventory/v1
-                name: rest
+                  name: rest
                       
       target:
         name: restcall-sample
